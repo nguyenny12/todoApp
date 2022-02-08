@@ -1,9 +1,8 @@
-
 const handleRemoveButtonClick = (e, todoItemElement) => {
   // console.log('Item remove click', todoItemElement);
   const todoListElement = getTodoListElement();
   if (todoListElement && todoItemElement) {
-    const confirmMessage = 'You\'re going to remove a todo. Thiet hk?';
+    const confirmMessage = "You're going to remove a todo. Thiet hk?";
     if (window.confirm(confirmMessage)) {
       todoListElement.removeChild(todoItemElement);
     }
@@ -64,9 +63,8 @@ const buildTodoItem = (todo) => {
   // Find and add event click for button remove
   const removeButton = todoItemElement.querySelector('#todoItemRemove');
   if (removeButton) {
-    removeButton.addEventListener(
-      'click',
-      (e) => handleRemoveButtonClick(e, todoItemElement)
+    removeButton.addEventListener('click', (e) =>
+      handleRemoveButtonClick(e, todoItemElement)
     );
     removeButton.removeAttribute('id');
   }
@@ -74,10 +72,7 @@ const buildTodoItem = (todo) => {
   // Find and add event click for button edit
   const editButton = todoItemElement.querySelector('#todoItemEdit');
   if (editButton) {
-    editButton.addEventListener(
-      'click',
-      (e) => handleEditButtonClick(e, todo)
-    );
+    editButton.addEventListener('click', (e) => handleEditButtonClick(e, todo));
     editButton.removeAttribute('id');
   }
 
@@ -87,15 +82,6 @@ const buildTodoItem = (todo) => {
 const getTodoListElement = () => document.querySelector('ul#todoList');
 
 const renderTodoList = (todoList) => {
-  // Find parent: ul#todoList
-  // Find todo item template
-  // Loop todoList
-  // For each todo item:
-  // - Clone template to new element
-  // - Set title
-  // - Bind events: Edit, Remove
-  // - Append li to ul
-  // const todoListElement = document.querySelector('ul#todoList');
   const todoListElement = getTodoListElement();
   if (todoListElement) {
     for (const todo of todoList) {
@@ -105,9 +91,6 @@ const renderTodoList = (todoList) => {
   }
 };
 
-// ----------------
-// MAIN LOGIC
-// ----------------
 const todoList = [
   {
     id: 1,
@@ -116,11 +99,9 @@ const todoList = [
   {
     id: 2,
     title: 'Code JS NEW',
-  }
+  },
 ];
 renderTodoList(todoList);
-
-
 
 // Handle todo form submit
 /**
@@ -132,11 +113,6 @@ renderTodoList(todoList);
 const getTodoFormValue = () => {
   const formValue = {};
 
-  // Find todo form
-  // Loop form control by names
-  // For each control
-  // - Get value
-  // - Add new key to formValue
   const todoForm = document.querySelector('#todoForm');
   if (todoForm) {
     const formControlNameList = ['title'];
@@ -151,10 +127,8 @@ const getTodoFormValue = () => {
 };
 
 const randomNumber = (min, max) => {
-  const randomNumber = Math.trunc(
-    Math.random() * (max - min)
-  );
-  // console.log(randomNumber + min);
+  const randomNumber = Math.trunc(Math.random() * (max - min));
+
   return randomNumber + min;
 };
 
@@ -170,14 +144,6 @@ const resetTodoForm = () => {
     submitButton.classList.add('btn-primary');
     submitButton.innerText = 'Add to list';
   }
-
-  // if (todoForm) {
-  //   const formControlNameList = ['title'];
-  //   for (const controlName of formControlNameList) {
-  //     const control = todoForm.querySelector(`[name=${controlName}]`);
-  //     control.value = '';
-  //   }
-  // }
 };
 
 const handleTodoFormSubmit = (e) => {
@@ -186,7 +152,7 @@ const handleTodoFormSubmit = (e) => {
 
   const todoForm = document.querySelector('#todoForm');
   if (todoForm) {
-    // Determine whether add or edit mode 
+    // Determine whether add or edit mode
     const mode = todoForm.hasAttribute('data-todo-id') ? 'edit' : 'add';
 
     const formValue = getTodoFormValue();
@@ -194,7 +160,9 @@ const handleTodoFormSubmit = (e) => {
       case 'edit': {
         const todoId = todoForm.getAttribute('data-todo-id');
         const todoListElement = getTodoListElement();
-        const todoItemElement = todoListElement.querySelector(`li[data-todo-id="${todoId}"]`);
+        const todoItemElement = todoListElement.querySelector(
+          `li[data-todo-id="${todoId}"]`
+        );
         const newTodo = {
           id: todoId,
           ...formValue,
@@ -221,11 +189,8 @@ const handleTodoFormSubmit = (e) => {
         break;
       }
       default:
-      // Do nothing =))
     }
   }
-
-
 
   // Reset form
   resetTodoForm();
